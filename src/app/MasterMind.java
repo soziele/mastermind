@@ -1,3 +1,4 @@
+package app;
 import java.util.*;
 
 
@@ -13,40 +14,40 @@ public class MasterMind {
     public void generateCode() {
         Random rand = new Random();
         for (int i = 0; i < 5; i++) {
-            secretCode[i] = rand.nextInt(8) + 1;    
+            this.secretCode[i] = rand.nextInt(8) + 1;    
         }
     }
 
     public void createBoard() {
-        currentRound = 0;
+        this.currentRound = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 4; j++) 
             {
-                codeBoard[i][j] = 0;        //0 - puste pole; 1 - 8 cyfry odpowiadające kolorkom
-                hintBoard[i][j] = 0;    //0 - brak bolca; 1 - biały bolec; 2 - czerwony bolec
+                this.codeBoard[i][j] = 0;        //0 - puste pole; 1 - 8 cyfry odpowiadające kolorkom
+                this.hintBoard[i][j] = 0;    //0 - brak bolca; 1 - biały bolec; 2 - czerwony bolec
             }
         }
     }
 
     public void enterCode() {
         for (int i = 0; i < 5; i++) {
-            tryCode[i] = in.nextInt();
-            codeBoard[currentRound][i] = tryCode[i];
+            //tryCode[i] = in.nextInt();
+            this.codeBoard[this.currentRound][i] = tryCode[i];
         }
     }
 
     public void checkCode() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (secretCode[i] == tryCode[j]) {
+                if (this.secretCode[i] == this.tryCode[j]) {
                     if (i == j)
-                        hintBoard[currentRound][i] = 2;
+                        this.hintBoard[this.currentRound][i] = 2;
                     else
-                        hintBoard[currentRound][i] = 1;
+                        this.hintBoard[this.currentRound][i] = 1;
                 }
             }
         }
-        Arrays.sort(hintBoard);
+        Arrays.sort(this.hintBoard);
     }
 
     public void printBoard() {
@@ -54,16 +55,16 @@ public class MasterMind {
             for (int j = 0; j < 4; j++)
             {
                 System.out.printf("------------------------------------\n");
-                System.out.printf("| %d ", hintBoard[i][j]);
+                System.out.printf("| %d ", this.hintBoard[i][j]);
                 if (j == 1)
                     System.out.println();
             }
             System.out.print("| Code:| ");
             for  (int k = 0; k < 5; k++) {
-                System.out.printf("%d | ", codeBoard[i][k]);
+                System.out.printf("%d | ", this.codeBoard[i][k]);
             }
         }
-        currentRound++;
+        this.currentRound++;
     }
 
     
