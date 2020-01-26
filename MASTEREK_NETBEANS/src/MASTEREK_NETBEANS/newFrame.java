@@ -60,26 +60,54 @@ public class newFrame extends javax.swing.JDialog{
         }
     }
     
-    public void checkCode() {
+    public void checkCode(){
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (this.secretCode[i] == this.tryCode[j]) {
                     if (i == j){
                         this.hintBoard[this.currentRound][i] = 2;
-                        this.hints[i].setBackground(Color.black);
+                        //this.paintHints(Color.black);
+                        this.hints[j].setBackground(Color.black);
                     }
                     else{
                         this.hintBoard[this.currentRound][i] = 1;
-                        this.hints[i].setBackground(Color.white);
+                        //this.paintHints(Color.white);
+                        this.hints[j].setBackground(Color.red);
                     }
                 }
+                /*
                 else
                     this.hints[i].setBackground(Color.red);
+                */
+            }
+        }
+    }
+    /*
+    public void paintHints(Color color){
+        if(color==Color.black){
+            for(int i = 0; i < 4; i++){
+                if(this.hints[i].getBackground()!=color){
+                    Color temp = this.hints[i].getBackground();
+                    this.hints[i].setBackground(color);
+                    if(i < 3){
+                    this.hints[i+1].setBackground(temp);
+                    }
+                }
+            }   
+        }
+        else if(color==Color.white){
+            for(int i = 0; i < 4; i++){
+                if(this.hints[i].getBackground()==Color.red){
+                    Color temp = Color.red;
+                    this.hints[i].setBackground(color);
+                    if(i < 3){
+                    this.hints[i+1].setBackground(temp);
+                    }
                 }
             }
-        
-        //Arrays.sort(this.hintBoard);
+        }
     }
+    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,6 +141,7 @@ public class newFrame extends javax.swing.JDialog{
         hint2 = new javax.swing.JLabel();
         hint3 = new javax.swing.JLabel();
         hint4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MasterMind");
@@ -292,14 +321,17 @@ public class newFrame extends javax.swing.JDialog{
         hint4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         hint4.setPreferredSize(new java.awt.Dimension(15, 15));
 
+        jLabel2.setText("kod spoiler");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(231, 231, 231)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -359,13 +391,24 @@ public class newFrame extends javax.swing.JDialog{
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkButton)))
                 .addGap(54, 54, 54))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,6 +677,14 @@ public class newFrame extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_slot8MouseReleased
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+       String kod="";
+       for(int i=0;i<4;i++){
+           kod+=this.secretCode[i]+" ";
+       }
+        jLabel2.setText(kod);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -689,6 +740,7 @@ public class newFrame extends javax.swing.JDialog{
     private javax.swing.JLabel hint3;
     private javax.swing.JLabel hint4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton orangeChoice;
     private javax.swing.JRadioButton pinkChoice;
     private javax.swing.JRadioButton purpleChoice;
