@@ -66,15 +66,15 @@ public class newFrame extends javax.swing.JDialog{
                 if (this.secretCode[i] == this.tryCode[j]) {
                     if (i == j){
                         this.hintBoard[this.currentRound][i] = 2;
-                        this.hints[i].setBackground(Color.red);
+                        this.hints[i].setBackground(Color.black);
                     }
                     else{
                         this.hintBoard[this.currentRound][i] = 1;
-                        this.hints[i].setBackground(Color.black);
+                        this.hints[i].setBackground(Color.white);
                     }
                 }
                 else
-                    this.hints[i].setBackground(Color.yellow);
+                    this.hints[i].setBackground(Color.red);
                 }
             }
         
