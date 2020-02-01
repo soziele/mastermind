@@ -26,7 +26,7 @@ public class newFrame extends javax.swing.JDialog{
     javax.swing.JButton slotBoard[][] = new javax.swing.JButton[10][4];
     
     /*
-                COLORS
+                COLOURS
     --------------------------------
     red=1
     yellow=2
@@ -157,7 +157,7 @@ public class newFrame extends javax.swing.JDialog{
     }
     
     public void checkCode(){
-        for (int i = 0; i < 4; i++) {
+       /*for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (this.secretCode[i] == this.tryCode[j]) {
                     if (i == j){
@@ -171,39 +171,40 @@ public class newFrame extends javax.swing.JDialog{
                         this.hints[this.currentRound][i].setBackground(Color.red);
                     }
                 }
+        */
+        int black = 0;
+        int red = 0;
+        boolean[] checked = {false,false,false,false};
+        for(int i = 0; i < 4; i++){
+            if(this.secretCode[i] == this.tryCode[i]){                      //zliczenie czarnych
+                black++;
+                checked[i] = true;
+            }
+        }
+        for(int i = 0; i < 4; i++){
+            if(secretCode[i] != tryCode[i]){
+                for(int j = 0; j < 4; j++){
+                    if(!checked[j] && j != i && this.tryCode[i] == this.secretCode[j]){    //zliczenie białych
+                        red++;
+                        checked[j] = true;
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < black; i++){                                     //kolorowanie czarnych na początku
+            this.hints[this.currentRound][i].setBackground(Color.black);
+        }
+        for(int i = black; i < black+red; i++){
+            this.hints[this.currentRound][i].setBackground(Color.red);      //kolorowanie czerwonych po czarnych
+        }
                 /*
                 else
                     this.hints[i].setBackground(Color.red);
-                */
+                
             }
         }
+        */
     }
-    /*
-    public void paintHints(Color color){                    //sortowanie żeby czarne hinty były przed białymi
-        if(color==Color.black){
-            for(int i = 0; i < 4; i++){
-                if(this.hints[i].getBackground()!=color){
-                    Color temp = this.hints[i].getBackground();
-                    this.hints[i].setBackground(color);
-                    if(i < 3){
-                    this.hints[i+1].setBackground(temp);
-                    }
-                }
-            }   
-        }
-        else if(color==Color.white){                        //a białe przed czerwonymi
-            for(int i = 0; i < 4; i++){
-                if(this.hints[i].getBackground()==Color.red){
-                    Color temp = Color.red;
-                    this.hints[i].setBackground(color);
-                    if(i < 3){
-                    this.hints[i+1].setBackground(temp);
-                    }
-                }
-            }
-        }
-    }
-    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -325,6 +326,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot1.setContentAreaFilled(false);
+        slot1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot1MouseClicked(evt);
@@ -372,6 +374,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot2.setContentAreaFilled(false);
+        slot2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot2MouseClicked(evt);
@@ -383,6 +386,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot3.setContentAreaFilled(false);
+        slot3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot3MouseClicked(evt);
@@ -394,6 +398,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot4.setContentAreaFilled(false);
+        slot4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot4MouseClicked(evt);
@@ -419,6 +424,7 @@ public class newFrame extends javax.swing.JDialog{
         whiteChoice.setPreferredSize(new java.awt.Dimension(32, 32));
 
         checkButton.setText("CHECK");
+        checkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         checkButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 checkButtonMouseClicked(evt);
@@ -427,6 +433,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot5.setContentAreaFilled(false);
+        slot5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot5MouseClicked(evt);
@@ -438,6 +445,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot6.setContentAreaFilled(false);
+        slot6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot6MouseClicked(evt);
@@ -449,6 +457,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot7.setContentAreaFilled(false);
+        slot7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot7MouseClicked(evt);
@@ -460,6 +469,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot8.setContentAreaFilled(false);
+        slot8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot8MouseClicked(evt);
@@ -494,6 +504,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot9.setContentAreaFilled(false);
+        slot9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot9MouseClicked(evt);
@@ -505,6 +516,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot10.setContentAreaFilled(false);
+        slot10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot10MouseClicked(evt);
@@ -516,6 +528,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot11.setContentAreaFilled(false);
+        slot11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot11MouseClicked(evt);
@@ -527,6 +540,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot12.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot12.setContentAreaFilled(false);
+        slot12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot12MouseClicked(evt);
@@ -538,6 +552,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot13.setContentAreaFilled(false);
+        slot13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot13MouseClicked(evt);
@@ -549,6 +564,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot14.setContentAreaFilled(false);
+        slot14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot14MouseClicked(evt);
@@ -560,6 +576,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot15.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot15.setContentAreaFilled(false);
+        slot15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot15MouseClicked(evt);
@@ -571,6 +588,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot16.setContentAreaFilled(false);
+        slot16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot16MouseClicked(evt);
@@ -582,6 +600,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot17.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot17.setContentAreaFilled(false);
+        slot17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot17MouseClicked(evt);
@@ -593,6 +612,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot18.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot18.setContentAreaFilled(false);
+        slot18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot18MouseClicked(evt);
@@ -604,6 +624,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot19.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot19.setContentAreaFilled(false);
+        slot19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot19MouseClicked(evt);
@@ -615,6 +636,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot20.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot20.setContentAreaFilled(false);
+        slot20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot20MouseClicked(evt);
@@ -626,6 +648,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot21.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot21.setContentAreaFilled(false);
+        slot21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot21.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot21MouseClicked(evt);
@@ -637,6 +660,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot22.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot22.setContentAreaFilled(false);
+        slot22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot22MouseClicked(evt);
@@ -648,6 +672,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot23.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot23.setContentAreaFilled(false);
+        slot23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot23.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot23MouseClicked(evt);
@@ -659,6 +684,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot24.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot24.setContentAreaFilled(false);
+        slot24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot24MouseClicked(evt);
@@ -670,6 +696,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot25.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot25.setContentAreaFilled(false);
+        slot25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot25MouseClicked(evt);
@@ -681,6 +708,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot26.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot26.setContentAreaFilled(false);
+        slot26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot26MouseClicked(evt);
@@ -692,6 +720,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot27.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot27.setContentAreaFilled(false);
+        slot27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot27.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot27MouseClicked(evt);
@@ -703,6 +732,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot28.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot28.setContentAreaFilled(false);
+        slot28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot28.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot28MouseClicked(evt);
@@ -714,6 +744,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot29.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot29.setContentAreaFilled(false);
+        slot29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot29.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot29MouseClicked(evt);
@@ -725,6 +756,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot30.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot30.setContentAreaFilled(false);
+        slot30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot30.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot30MouseClicked(evt);
@@ -736,6 +768,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot31.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot31.setContentAreaFilled(false);
+        slot31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot31.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot31MouseClicked(evt);
@@ -747,6 +780,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot32.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot32.setContentAreaFilled(false);
+        slot32.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot32.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot32MouseClicked(evt);
@@ -758,6 +792,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot33.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot33.setContentAreaFilled(false);
+        slot33.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot33.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot33MouseClicked(evt);
@@ -769,6 +804,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot34.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot34.setContentAreaFilled(false);
+        slot34.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot34.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot34MouseClicked(evt);
@@ -780,6 +816,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot35.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot35.setContentAreaFilled(false);
+        slot35.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot35.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot35MouseClicked(evt);
@@ -791,6 +828,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot36.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot36.setContentAreaFilled(false);
+        slot36.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot36.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot36MouseClicked(evt);
@@ -802,6 +840,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot37.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot37.setContentAreaFilled(false);
+        slot37.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot37.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot37MouseClicked(evt);
@@ -813,6 +852,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot38.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot38.setContentAreaFilled(false);
+        slot38.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot38.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot38MouseClicked(evt);
@@ -824,6 +864,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot39.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot39.setContentAreaFilled(false);
+        slot39.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot39.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot39MouseClicked(evt);
@@ -835,6 +876,7 @@ public class newFrame extends javax.swing.JDialog{
 
         slot40.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\kulapusta.png")); // NOI18N
         slot40.setContentAreaFilled(false);
+        slot40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         slot40.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 slot40MouseClicked(evt);
