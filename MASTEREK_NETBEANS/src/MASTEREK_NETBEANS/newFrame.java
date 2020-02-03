@@ -21,14 +21,14 @@ public class newFrame extends javax.swing.JDialog{
      * Creates new form newFrame
      */
     private int currentRound;
-    private int[] tryCode = new int[4];
-    private int[] secretCode = new int[4];
-    private int[][] codeBoard = new int[10][4];
-    private int[][] hintBoard = new int[10][4];
-    javax.swing.JLabel hints[][] = new javax.swing.JLabel[10][4]; //tablica podpowiedzi 
-    javax.swing.JButton slotBoard[][] = new javax.swing.JButton[10][4];
-    javax.swing.Icon bulbIcons[] = new javax.swing.Icon[8];
-    javax.swing.Icon hintIcons[] = new javax.swing.Icon[2];
+    private int[] tryCode = new int[4];                                         
+    private int[] secretCode = new int[4];  
+    private int[][] codeBoard = new int[10][4];                                 
+    private javax.swing.JLabel hints[][] = new javax.swing.JLabel[10][4];       //tablica podpowiedzi 
+    private javax.swing.JButton slotBoard[][] = new javax.swing.JButton[10][4]; //wyświetlane miejsca z żarówkami
+    private javax.swing.Icon bulbIcons[] = new javax.swing.Icon[9];             
+    private javax.swing.Icon hintIcons[] = new javax.swing.Icon[2];             
+    private javax.swing.Icon roundIcons[] = new javax.swing.Icon[10];
     /*
                 COLOURS
     --------------------------------
@@ -158,9 +158,22 @@ public class newFrame extends javax.swing.JDialog{
         this.bulbIcons[5] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\bulb_orange.png");
         this.bulbIcons[6] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\bulb_green.png");
         this.bulbIcons[7] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\bulb_pink.png");
+        this.bulbIcons[8] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\bulb_off.png");
         
         this.hintIcons[0] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\very_good.png");
         this.hintIcons[1] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\good.png");
+        
+        this.roundIcons[0] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\1.png");
+        this.roundIcons[1] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\2.png");
+        this.roundIcons[2] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\3.png");
+        this.roundIcons[3] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\4.png");
+        this.roundIcons[4] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\5.png");
+        this.roundIcons[5] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\6.png");
+        this.roundIcons[6] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\7.png");
+        this.roundIcons[7] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\8.png");
+        this.roundIcons[8] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\9.png");
+        this.roundIcons[9] = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\10.png");
+        
     }
     
     public void generateCode(){
@@ -176,13 +189,11 @@ public class newFrame extends javax.swing.JDialog{
         this.loadIcons();
         this.generateSlotTable();
         this.generateHintTable();
-        
-        
-        
+          
+            
         for(int i = 0; i < 10; i++){
             for(int j=0; j < 4; j++){
-                this.codeBoard[i][j] = 0;   //0 - puste pole; 1 - 8 cyfry odpowiadające kolorkom
-                this.hintBoard[i][j] = 0;   //0 - brak bolca; 1 - biały bolec; 2 - czerwony bolec
+                this.codeBoard[i][j] = 0;   //0 - puste pole; 1 - 8 cyfry odpowiadające kolorom
             }
         }
         
@@ -190,37 +201,37 @@ public class newFrame extends javax.swing.JDialog{
     
     public void checkCode() {
     
-        int black = 0;
-        int red = 0;
+        int green = 0;
+        int yellow = 0;
         boolean[] checked = {false,false,false,false};
         for(int i = 0; i < 4; i++){
-            if(this.secretCode[i] == this.tryCode[i]){                      //zliczenie czarnych
-                black++;
+            if(this.secretCode[i] == this.tryCode[i]){                      //zliczenie zielonych
+                green++;
                 checked[i] = true;
             }
         }
         for(int i = 0; i < 4; i++){
             if(secretCode[i] != tryCode[i]){
                 for(int j = 0; j < 4; j++){
-                    if(!checked[j] && j != i && this.tryCode[i] == this.secretCode[j]){    //zliczenie białych
-                        red++;
+                    if(!checked[j] && j != i && this.tryCode[i] == this.secretCode[j]){    //zliczenie żółtych
+                        yellow++;
                         checked[j] = true;
                     }
                 }
             }
         }
-        for(int i = 0; i < black; i++){                                     //kolorowanie czarnych na początku
+        for(int i = 0; i < green; i++){                                     //kolorowanie zielonych na początku
             this.hints[this.currentRound][i].setIcon(this.hintIcons[0]);
         }
-        for(int i = black; i < black+red; i++){
-            this.hints[this.currentRound][i].setIcon(this.hintIcons[1]);      //kolorowanie czerwonych po czarnych
+        for(int i = green; i < green+yellow; i++){
+            this.hints[this.currentRound][i].setIcon(this.hintIcons[1]);      //kolorowanie żółtych po zielonych
         }
-        if(black == 4) this.winnerWinnerChickenDinner();
+        if(green == 4) this.winnerWinnerChickenDinner();
        
     }
     public void winnerWinnerChickenDinner() {
         
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Downloads\\award.png");
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\winner.png");
         int bestScore=10;
         try{
             Scanner file = new Scanner(new File("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\Best_score\\bestscore.txt"));
@@ -356,20 +367,20 @@ public class newFrame extends javax.swing.JDialog{
         hint38 = new javax.swing.JLabel();
         hint39 = new javax.swing.JLabel();
         hint40 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MasterMind");
         setBackground(null);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusableWindowState(false);
+        setLocation(new java.awt.Point(350, 50));
         setMaximumSize(new java.awt.Dimension(550, 580));
         setMinimumSize(new java.awt.Dimension(505, 580));
-        setPreferredSize(new java.awt.Dimension(400, 630));
+        setPreferredSize(new java.awt.Dimension(400, 610));
         setResizable(false);
-        setSize(new java.awt.Dimension(400, 630));
+        setSize(new java.awt.Dimension(400, 610));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -1290,17 +1301,7 @@ public class newFrame extends javax.swing.JDialog{
         hint40.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\not_good.png")); // NOI18N
         hint40.setPreferredSize(new java.awt.Dimension(14, 25));
 
-        jMenu1.setText("New game");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Info");
-        jMenuBar1.add(jMenu2);
-
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sonia\\Desktop\\programowanie\\mastermind2\\project_mastermind\\MASTEREK_NETBEANS\\Graphics\\1.png")); // NOI18N
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1489,8 +1490,14 @@ public class newFrame extends javax.swing.JDialog{
                                         .addComponent(slot27, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(10, 10, 10)
                                         .addComponent(slot28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(59, 59, 59)
-                                .addComponent(checkButton))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(checkButton))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addGap(29, 29, 29))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1603,50 +1610,55 @@ public class newFrame extends javax.swing.JDialog{
                             .addComponent(slot30, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slot28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot25, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot26, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot27, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(slot28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot25, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot26, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot27, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(slot24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(slot21, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(slot22, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(slot23, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, 0)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(slot17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(slot18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(slot19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(slot20, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(checkButton)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(slot24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(slot21, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(slot22, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(slot23, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(slot14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot13, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(slot17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(slot18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(slot19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(slot20, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(slot9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot12, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(slot7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(slot1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slot4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(checkButton)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(slot14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot13, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slot9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot12, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slot7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slot1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slot4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel3)))))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(redChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1657,7 +1669,7 @@ public class newFrame extends javax.swing.JDialog{
                     .addComponent(whiteChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(orangeChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(greenChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("label1");
@@ -1837,20 +1849,36 @@ public class newFrame extends javax.swing.JDialog{
     }//GEN-LAST:event_purpleChoiceActionPerformed
 
     private void checkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkButtonMouseClicked
-        this.checkButton.setBackground(Color.red);
+ 
+        boolean okay = true;
         for(int i = 0; i < 4; i++){
-        this.slotBoard[this.currentRound][i].setDisabledIcon(this.slotBoard[this.currentRound][i].getIcon());
-        this.slotBoard[this.currentRound][i].setEnabled(false);
-        
-        if(this.currentRound < 9){
-            this.slotBoard[this.currentRound+1][i].setEnabled(true);
-        }
+            if(this.slotBoard[this.currentRound][i].getIcon().toString() == this.bulbIcons[8].toString()){
+                okay = false;
+            }
         }
         
-        this.checkCode();
+        if(okay == true){
+            for(int i = 0; i < 4; i++){
+            this.slotBoard[this.currentRound][i].setDisabledIcon(this.slotBoard[this.currentRound][i].getIcon());
+            this.slotBoard[this.currentRound][i].setEnabled(false);
         
-        this.currentRound++;
-        this.checkButton.setBackground(Color.green);
+            if(this.currentRound < 9){
+                this.slotBoard[this.currentRound+1][i].setEnabled(true);
+                this.jLabel3.setIcon(this.roundIcons[this.currentRound+1]);
+                }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "You loose!"); 
+                this.checkButton.setEnabled(false);
+                break;
+            }
+            }
+            this.checkCode();  
+            this.currentRound++;
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Please light up all four bulbs!");   
+        }
+
         
     }//GEN-LAST:event_checkButtonMouseClicked
 
@@ -2150,11 +2178,6 @@ public class newFrame extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_slot40MouseReleased
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        
-        this.createBoard();
-    }//GEN-LAST:event_jMenu1MouseClicked
-
     private void slot30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slot30ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_slot30ActionPerformed
@@ -2276,8 +2299,7 @@ public class newFrame extends javax.swing.JDialog{
     private javax.swing.JLabel hint9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JRadioButton orangeChoice;
     private javax.swing.JRadioButton pinkChoice;
