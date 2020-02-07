@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package MASTEREK_NETBEANS;
 import java.awt.Color;
 import java.util.*;
@@ -36,7 +32,7 @@ public class newFrame extends javax.swing.JDialog{
     yellow=2
     purple=3
     blue=4
-    white=5
+    cyan=5
     orange=6
     green=7
     pink=8
